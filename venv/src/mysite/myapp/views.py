@@ -2,21 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 # Create your views here.
-def index(request):
-    ht = """<!DOCTYPE html>
-    <html lang=en>
-    <head>
-    </head>
-    <body>
-    <h1>Hello!</h1>
-    <p>My HTML </p>
-    </body>
-    </html>
-    """
-    return HttpResponse(ht)
-
 def home(request):
-    return render(request,"Homepage")
+    mylist = {"0", "1", "2", "3", "4", 5, 6, 7, 8}
+    return render(request, "home.html", {"var":"string of words", "yy":mylist})
 
-def mything(request):
-    return "Oscar"
+
+def new_home(request):
+    return render(request, "base.html", {"var":"New Home stuff"})
