@@ -2,12 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block head_title %}My Django App{% endblock head_title %}</title>
+    {% include 'snippets/css.html' %}
 </head>
 <body>
 
+{% include 'snippets/nav.html' %}
+
+
 {% block content %}
 {% endblock content %}
+
+
+{% include 'snippets/js.html' %}
 
 </body>
 </html>

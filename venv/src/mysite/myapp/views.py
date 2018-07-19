@@ -9,3 +9,9 @@ def home(request):
 
 def new_home(request):
     return render(request, "base.html", {"var":"New Home stuff"})
+
+def about(request):
+    return render(request, "about.html", {"var":"New Home stuff"})
+
+def contact(request):
+    return render(request, "contact.html", {"var":"New Home stuff"})
