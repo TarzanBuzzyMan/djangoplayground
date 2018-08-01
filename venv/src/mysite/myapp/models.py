@@ -21,9 +21,9 @@ class SiteStatusTransaction(models.Model):
     destination         = models.CharField(max_length=120)
     etd                 = models.DateTimeField(default=timezone.now)
     eta                 = models.DateTimeField()
-    arrival_datetime    = models.DateTimeField(blank=True)
+    arrival_datetime    = models.DateTimeField(blank=True, null=True)
     late_meal           = models.BooleanField(default=False)
 
     def __str__(self):
-        display_string = "User: {} Status: {} Destination: {} ETD: {} ETA: {} Arrival {}".format(self.person.username, self.status_type, self.destination, self.etd, self.eta, self.arrival_datetime)
+        display_string = "User: {} Status: {} Destination: {} ETD: {} ETA: {} - Actual Arrival: {}".format(self.person.username, self.status_type, self.destination, self.etd, self.eta, self.arrival_datetime)
         return display_string
