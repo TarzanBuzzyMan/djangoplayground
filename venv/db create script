@@ -12,3 +12,8 @@ GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
 \q
 
 postgres@djangodev-VirtualBox:~$ exit
+
+
+cd
+cd PycharmProjects/DjangoDev/venv/src/mysite/
+python manage.py createsuperuser
