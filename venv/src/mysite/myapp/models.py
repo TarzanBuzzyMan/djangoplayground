@@ -16,7 +16,7 @@ class SiteStatusType(models.Model):
 
 class SiteStatus(models.Model):
     persons             = models.ManyToManyField(User)
-    site_status_type         = models.ForeignKey(SiteStatusType, on_delete=models.CASCADE)
+    site_status_type    = models.ForeignKey(SiteStatusType, on_delete=models.CASCADE)
     destination         = models.CharField(max_length=120)
     etd                 = models.DateTimeField(default=timezone.now)
     eta                 = models.DateTimeField()
