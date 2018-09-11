@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block head_title %}My Django App{% endblock head_title %}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     {% include 'snippets/css.html' %}
+
+    <title>{% block head_title %}My Django App{% endblock head_title %}</title>
 </head>
 <body>
 
-{% include 'snippets/nav.html' %}
+<div class="container">
+
+    {% include 'snippets/nav.html' %}
 
 
-{% block content %}
-{% endblock content %}
+    {% block content %}
+    {% endblock content %}
 
+</div>
 
 {% include 'snippets/js.html' %}
 
