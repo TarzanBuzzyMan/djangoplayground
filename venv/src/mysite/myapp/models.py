@@ -29,3 +29,13 @@ class SiteStatus(models.Model):
 
     def get_person_names(self):
         return ", ".join(person.username for person in self.persons.all())
+
+class Aircraft(models.Model):
+    registration        = models.CharField(max_length=10)
+    maintenance_due     = models.DecimalField(max_digits=10, decimal_places=2)
+
+class Booking(models.Model):
+    aircraft            = models.ForeignKey(Aircraft, on_delete=models.CASCADE)
+    student             = models.ForeignKey(User, related_name='student')
+    instructor          = models.ForeignKey(User, related_name='instructor')
+    passengers          = models.ManyToManyField(User, blank=True, related_name='passengers')
