@@ -13,7 +13,6 @@ class SiteStatusType(models.Model):
         return display_string
 
 
-
 class SiteStatus(models.Model):
     persons             = models.ManyToManyField(User)
     site_status_type    = models.ForeignKey(SiteStatusType, on_delete=models.CASCADE)
@@ -30,12 +29,56 @@ class SiteStatus(models.Model):
     def get_person_names(self):
         return ", ".join(person.username for person in self.persons.all())
 
+
+class AircraftType(models.Model):
+    name    = models.CharField(max_length=120)
+
+    def __str__(self):
+        display_string = "{}".format(self.name)
+        return display_string
+
+
 class Aircraft(models.Model):
     registration        = models.CharField(max_length=10)
     maintenance_due     = models.DecimalField(max_digits=10, decimal_places=2)
+    aircraft_type       = models.ForeignKey(AircraftType, on_delete=models.CASCADE)
+
+    def __str__(self):
+        display_string = "{} - Type: {}".format(self.registration, self.aircraft_type)
+        return display_string
+
 
 class Booking(models.Model):
     aircraft            = models.ForeignKey(Aircraft, on_delete=models.CASCADE)
-    student             = models.ForeignKey(User, related_name='student')
-    instructor          = models.ForeignKey(User, related_name='instructor')
-    passengers          = models.ManyToManyField(User, blank=True, related_name='passengers')
+    student             = models.ForeignKey(User, related_name='booking_student')
+    instructor          = models.ForeignKey(User, related_name='booking_instructor')
+    passengers          = models.ManyToManyField(User, blank=True, related_name='booking_passengers')
+    etd                 = models.DateTimeField()
+    eta                 = models.DateTimeField()
+
+    def __str__(self):
+        display_string = "Aircraft: {} Student: {} Instructor: {} ETD: {} ETA: {}".format(self.aircraft, self.student, self.instructor, self.etd, self.eta)
+        return display_string
+
+
+class FlightType(models.Model):
+    name    = models.CharField(max_length=120)
+
+    def __str__(self):
+        display_string = "{}".format(self.name)
+        return display_string
+
+
+class FlightAuthorisation(models.Model):
+    aircraft            = models.ForeignKey(Aircraft, on_delete=models.CASCADE)
+    flight_type         = models.ForeignKey(FlightType, on_delete=models.CASCADE)
+    student             = models.ForeignKey(User, related_name='flight_student')
+    instructor          = models.ForeignKey(User, related_name='flight_instructor')
+    passengers          = models.ManyToManyField(User, blank=True, related_name='flight_passengers')
+    etd                 = models.DateTimeField()
+    eta                 = models.DateTimeField()
+    notes               = models.CharField(max_length=120)
+
+    def __str__(self):
+        display_string = "Aircraft: {} FlightType: {} Student: {} Instructor: {} ETD: {} ETA: {}, Notes: {}".format(self.aircraft, self.flight_type, self.student, self.instructor, self.etd, self.eta, self.notes)
+        return display_string
